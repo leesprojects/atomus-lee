@@ -28,7 +28,7 @@ It was a nice and easy project as I had already done a MEAN full-stack course be
 
 ### Dependencies & Packages
 Install Angular Materials
-  - npm install --save @angular/material
+  - npx nx g @angular/material:ng-add --project=booking-app
 
 
 ### Key nx commands to remember

@@ -2,4 +2,9 @@ $navbar-height: 5vh;
 
 mat-toolbar{
   height: $navbar-height;
+
+  a{
+    margin: 10px;
+  }
+
 }

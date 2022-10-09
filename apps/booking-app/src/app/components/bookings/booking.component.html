@@ -1,0 +1,73 @@
+<div class="booking-body">
+  <h1>Schedule a booking</h1>
+
+  <form (submit)="addBooking(bookingForm)" #bookingForm="ngForm">
+      <mat-card class="card-create-booking">
+        <mat-card-title>New Booking</mat-card-title>
+        <mat-card-content>
+          <mat-form-field>
+            <input
+              matInput
+              type="text"
+              name="name"
+              placeholder="Name"
+              [ngModel]="booking?.name"
+              #name="ngModel"
+              required
+              minLength = 6;
+              />
+              <mat-error *ngIf="name">"Please enter a name"</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input
+              matInput
+              type="date"
+              name="date"
+              [ngModel]="booking?.date"
+              #dateTime="ngModel"
+              required
+              />
+          </mat-form-field>
+          <mat-form-field>
+            <input
+              matInput
+              type="text"
+              name="reason"
+              placeholder="Reason for booking"
+              [ngModel]="booking?.reason"
+              #reason="ngModel"
+              required
+              minLength = 10;
+              />
+              <mat-error *ngIf="reason">"Please enter a reason for booking"</mat-error>
+          </mat-form-field>
+        </mat-card-content>
+
+        <mat-card-footer>
+          <button
+          mat-raised-button
+          color="primary"
+          type="submit">Create</button>
+        </mat-card-footer>
+      </mat-card>
+  </form>
+
+  <div class="booking-card-grid" *ngIf="toggleBookings">
+    <ng-container *ngFor="let booking of bookings">
+      <mat-card class="booking-card">
+        <mat-card-title>
+          <h1>{{booking.name}}</h1>
+        </mat-card-title>
+        <mat-card-content>
+          <p>Booking Scheduled for: {{booking.date}}</p>
+          <p>Reason for booking: {{booking.reason}}</p>
+        </mat-card-content>
+      </mat-card>
+    </ng-container>
+  </div>
+
+
+  <button mat-raised-button color="primary" (click)="deleteBooking()">Delete Booking</button>
+  <button mat-raised-button color="primary" (click)="toggleBookingList()">Display Bookings</button>
+
+</div>

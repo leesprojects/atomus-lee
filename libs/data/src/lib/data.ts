@@ -1,6 +1,6 @@
 export interface Booking {
   name: string;
-  dateTime: Date;
+  date: Date;
   reason: string;
 }
 

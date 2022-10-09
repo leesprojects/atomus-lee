@@ -7,7 +7,9 @@
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/booking-app",
         "index": "apps/booking-app/src/index.html",
@@ -19,7 +21,10 @@
           "apps/booking-app/src/favicon.ico",
           "apps/booking-app/src/assets"
         ],
-        "styles": ["apps/booking-app/src/styles.scss"],
+        "styles": [
+          "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+          "apps/booking-app/src/styles.scss"
+        ],
         "scripts": []
       },
       "configurations": {
@@ -87,7 +92,9 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/booking-app"],
+      "outputs": [
+        "coverage/apps/booking-app"
+      ],
       "options": {
         "jestConfig": "apps/booking-app/jest.config.ts",
         "passWithNoTests": true
