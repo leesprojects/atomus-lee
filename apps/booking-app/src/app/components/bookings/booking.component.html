@@ -1,4 +1,6 @@
 <div class="booking-body">
+  <ng-container *ngIf="toggleForm">
+
   <h1>Schedule a booking</h1>
 
   <form (submit)="addBooking(bookingForm)" #bookingForm="ngForm">
@@ -14,7 +16,8 @@
               [ngModel]="booking?.name"
               #name="ngModel"
               required
-              minLength = 6;
+              default="Name"
+              minLength = 4;
               />
               <mat-error *ngIf="name">"Please enter a name"</mat-error>
           </mat-form-field>
@@ -27,6 +30,7 @@
               #dateTime="ngModel"
               required
               />
+              <mat-error *ngIf="reason">"Please enter a valid date"</mat-error>
           </mat-form-field>
           <mat-form-field>
             <input
@@ -51,23 +55,19 @@
         </mat-card-footer>
       </mat-card>
   </form>
+</ng-container>
 
-  <div class="booking-card-grid" *ngIf="toggleBookings">
-    <ng-container *ngFor="let booking of bookings">
-      <mat-card class="booking-card">
-        <mat-card-title>
-          <h1>{{booking.name}}</h1>
-        </mat-card-title>
-        <mat-card-content>
-          <p>Booking Scheduled for: {{booking.date}}</p>
-          <p>Reason for booking: {{booking.reason}}</p>
-        </mat-card-content>
-      </mat-card>
-    </ng-container>
-  </div>
+<ng-container *ngIf="!toggleForm">
 
+  <mat-card>
+    <mat-card-header>
+      <h1>Booking Confirmed</h1>
+    </mat-card-header>
+    <mat-card-content>
+      <p> {{bookingConfirm}} </p>
+    </mat-card-content>
+  </mat-card>
 
-  <button mat-raised-button color="primary" (click)="deleteBooking()">Delete Booking</button>
-  <button mat-raised-button color="primary" (click)="toggleBookingList()">Display Bookings</button>
+</ng-container>
 
 </div>

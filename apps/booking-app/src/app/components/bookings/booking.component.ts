@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient} from '@angular/common/http';
 import { NgForm } from '@angular/forms';
 
 import { Booking } from '@atomus-lee/data'
-import { UnprocessableEntityException } from '@nestjs/common';
 
 @Component({
   selector: 'atomus-lee-booking',
@@ -13,49 +12,44 @@ import { UnprocessableEntityException } from '@nestjs/common';
 
 export class BookingComponent {
   title = 'atomus-lee-bookings';
+  booking: Booking | undefined;
 
   bookings: Booking[] = [];
-  booking: Booking | undefined;
-  toggleBookings = false;
+  toggleForm = true;
+  bookingConfirm = "";
 
   constructor(private http: HttpClient) {
-    this.fetchBookings();
+    //this.fetchBookings();
   }
 
-  fetchBookings() {
-    this.http.get<Booking[]>('/api/get-bookings').subscribe((booking) => this.bookings = booking);
-  }
-
-  addBooking(form: NgForm) {
-    if(form.value.name === undefined && form.value.date === undefined && form.value.reason === undefined){
-      return;
-    }
+  addBooking(bookingForm: NgForm){
+    if(bookingForm.invalid) { return; }
 
     const booking: Booking = {
-      name: form.value.name,
-      date: form.value.date,
-      reason: form.value.reason
+      name: bookingForm.value.name,
+      date: bookingForm.value.date,
+      reason: bookingForm.value.reason
     }
 
-    this.http.post('/api/summary', booking)
-      .subscribe((res) => {
-        console.log(res); //Response
-        this.fetchBookings();
-        form.resetForm();
-      })
+    this.http.post<{ bookingConfirm: string }>('http://localhost:3000/summary', booking)
+    .subscribe((res) => {
+      bookingForm.reset();
+      this.bookingConfirm = res.bookingConfirm;
+      this.toggleBookingList();
+    })
+
+
   }
 
-  deleteBooking(){
-    if(this.bookings.length <= 0){ return; }
-
-    this.http.delete('api/summary').subscribe(() => {
-      this.fetchBookings();
-    }
-  )}
+  getBookings(){
+    this.http
+    .get<{messsage: string, bookings: Booking[]}>('http://localhost:3000/summary')
+    .subscribe((res) => {
+      console.log(res.bookings)
+    })
+  }
 
   toggleBookingList(){
-    this.toggleBookings = !this.toggleBookings;
-    this.fetchBookings();
+    this.toggleForm = !this.toggleForm;
   }
-
 }

@@ -2,9 +2,10 @@ $navbar-height: 5vh;
 
 mat-toolbar{
   height: $navbar-height;
+  display: flex;
+  justify-content: center;
 
   a{
     margin: 10px;
   }
-
 }

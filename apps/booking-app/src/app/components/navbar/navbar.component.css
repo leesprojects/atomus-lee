@@ -1,5 +1,7 @@
 mat-toolbar {
   height: 5vh;
+  display: flex;
+  justify-content: center;
 }
 mat-toolbar a {
   margin: 10px;

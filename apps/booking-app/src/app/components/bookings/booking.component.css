@@ -1,9 +1,11 @@
 .booking-body {
-  margin: 30px;
+  width: 50%;
+  margin: 50px auto;
+  text-align: center;
 }
 
 .booking-card-grid {
-  margin: 10px;
+  margin: 10px auto;
   display: flex;
   align-items: center;
   flex-direction: row;
@@ -15,9 +17,10 @@
   width: 300px;
 }
 
-.card-create-booking {
-  width: 500px;
-}
 .card-create-booking input {
+  margin: 20px;
+}
+
+button, mat-form-field {
   margin: 10px;
 }/*# sourceMappingURL=booking.component.css.map */
